@@ -1,23 +1,25 @@
 package app.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "estudiante")
+@PrimaryKeyJoinColumn(referencedColumnName = "usr_codigo", name = "usr_codigo")
 public class Estudiante extends Usuario {
-	// regla de negocio: puedo crear un estudiante que no este asociado
-	@OneToOne()
-	@JoinColumn(name ="usr_codigo")
-	private Usuario usuario;
-	@Column(name = "est_carrera")
+
+	@Column(name = "estd_carrera")
 	private String carrera;
 	@Column(name = "estd_semestre")
 	private String semestre;
-	
 
 	public Estudiante() {
 		super();
@@ -30,8 +32,8 @@ public class Estudiante extends Usuario {
 	}
 
 	public Estudiante(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
-			String rol, String telefono, String contrasena, String activo, String carrera, String semestre) {
-		super(codigo, nombre, apellido1, apellido2, correoInstitucional, rol, telefono, contrasena, activo);
+			String rol, String telefono, String contrasena, String activo, String carrera, String semestre, List<Proceso> procesos) {
+		super(codigo, nombre, apellido1, apellido2, correoInstitucional, rol, telefono, contrasena, activo,procesos);
 		this.carrera = carrera;
 		this.semestre = semestre;
 	}
@@ -64,5 +66,4 @@ public class Estudiante extends Usuario {
 		this.semestre = semestre;
 	}
 
-	
 }

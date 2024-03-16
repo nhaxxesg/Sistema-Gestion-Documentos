@@ -8,22 +8,54 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "empleado")
-public class Empleado extends Usuario{
-	@Id
-	@OneToOne
-	@JoinColumn(name = "usr_codigo")
-	private Usuario usuario;
-	
+@PrimaryKeyJoinColumn(name = "usr_codigo", referencedColumnName = "usr_codigo")
+public class Empleado extends Usuario {
+
 	@Column(name = "emp_area")
 	private String area;
-	
+
 	@OneToMany(mappedBy = "empleado")
 	private List<Informe> informes;
 	
-	
-	
+	@OneToMany(mappedBy = "empleado")
+	private List<Observacion> observacionesRealizadas;
+
+	public Empleado() {
+		super();
+	}
+
+	public Empleado(String area, List<Informe> informes) {
+		super();
+		this.area = area;
+		this.informes = informes;
+	}
+
+	public Empleado(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
+			String rol, String telefono, String contrasena, String activo, String area, List<Informe> informes, List<Proceso> procesos) {
+		super(codigo, nombre, apellido1, apellido2, correoInstitucional, rol, telefono, contrasena, activo, procesos);
+		this.area = area;
+		this.informes = informes;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public List<Informe> getInformes() {
+		return informes;
+	}
+
+	public void setInformes(List<Informe> informes) {
+		this.informes = informes;
+	}
+
 }

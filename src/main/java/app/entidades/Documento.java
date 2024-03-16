@@ -19,7 +19,7 @@ public class Documento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "doc_id")
-	private String idDocumento;
+	private Integer idDocumento;
 	@Column(name = "doc_titulo")
 	private String titulo;
 	@Column(name = "doc_fecha_creacion")
@@ -40,4 +40,93 @@ public class Documento {
 	@OneToMany(mappedBy = "documento")
 	private List<Observacion> observaciones;
 
+	public Documento() {
+		super();
+	}
+
+	public Documento(String titulo, Date fechaCreacion, Date fechaModificacion, Date fechaEmision, String estado,
+			String formato, Proceso proceso) {
+		super();
+		this.titulo = titulo;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaModificacion = fechaModificacion;
+		this.fechaEmision = fechaEmision;
+		this.estado = estado;
+		this.formato = formato;
+		this.proceso = proceso;
+	}
+
+	public Integer getIdDocumento() {
+		return idDocumento;
+	}
+
+	public void setIdDocumento(Integer idDocumento) {
+		this.idDocumento = idDocumento;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
+	public Date getFechaEmision() {
+		return fechaEmision;
+	}
+
+	public void setFechaEmision(Date fechaEmision) {
+		this.fechaEmision = fechaEmision;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
+	public Proceso getProceso() {
+		return proceso;
+	}
+
+	public void setProceso(Proceso proceso) {
+		this.proceso = proceso;
+	}
+
+	public List<Observacion> getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(List<Observacion> observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "usr_rol", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
 	@Id
 	@Column(name = "usr_codigo")
@@ -28,22 +29,21 @@ public class Usuario {
 	@Column(name = "usr_activo")
 	private String activo;
 	
-	//relaciones
-	@OneToOne(mappedBy = "usuario")
-	private Estudiante estudiante;
-	@OneToMany(mappedBy = "usuario")
+	
+	/*@OneToMany(mappedBy = "usuario")
 	private List<Notificacion> notificaciones;
 	@OneToMany(mappedBy = "usuario")
 	private List<Proceso> procesos;
-	@OneToOne(mappedBy = "usuario")
-	private Empleado empleado;
+	*/
+	@OneToMany(mappedBy = "usuario")
+	private List<Proceso> procesos;
 	
 	public Usuario() {
 		super();
 	}
 
 	public Usuario(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
-			String rol, String telefono, String contrasena, String activo) {
+			String rol, String telefono, String contrasena, String activo, List<Proceso> procesos) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -54,7 +54,10 @@ public class Usuario {
 		this.telefono = telefono;
 		this.contrasena = contrasena;
 		this.activo = activo;
+		this.procesos = procesos;
+		
 	}
+	
 
 	// Getters y Setters
 	public String getCodigo() {
