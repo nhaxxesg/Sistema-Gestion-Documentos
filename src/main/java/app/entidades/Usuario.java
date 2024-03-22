@@ -35,7 +35,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	private List<Proceso> procesos;
 	*/
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
 	private List<Proceso> procesos;
 	
 	public Usuario() {
@@ -132,6 +132,8 @@ public class Usuario {
 		this.activo = activo;
 	}
 
+	
+
 	// Método toString()
 	@Override
 	public String toString() {
@@ -139,5 +141,13 @@ public class Usuario {
 				+ '\'' + ", apellido2='" + apellido2 + '\'' + ", correoInstitucional='" + correoInstitucional + '\''
 				+ ", rol='" + rol + '\'' + ", telefono='" + telefono + '\'' + ", contrasena='" + contrasena + '\''
 				+ ", activo='" + activo + '\'' + '}';
+	}
+
+	public List<Proceso> getProcesos() {
+		return procesos;
+	}
+
+	public void setProcesos(List<Proceso> procesos) {
+		this.procesos = procesos;
 	}
 }

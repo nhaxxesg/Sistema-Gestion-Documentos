@@ -22,10 +22,10 @@ public class Proceso {
 	private String estado;
 
 	@ManyToOne
-	@JoinColumn(name = "usr_codigo")
+	@JoinColumn(name = "usr_codigo", nullable = false)
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "proceso")
+	@OneToMany(mappedBy = "proceso", cascade = CascadeType.PERSIST)
 	private List<Documento> documentos;
 
 	public Proceso() {
@@ -40,6 +40,17 @@ public class Proceso {
 		this.fechaFinalizacion = fechaFinalizacion;
 		this.estado = estado;
 		this.usuario = usuario;
+		this.documentos = documentos;
+	}
+
+	
+
+	public Proceso(String nombre, Date fechaInicio, Date fechaFinalizacion, String estado,
+			List<Documento> documentos) {
+		this.nombre = nombre;
+		this.fechaInicio = fechaInicio;
+		this.fechaFinalizacion = fechaFinalizacion;
+		this.estado = estado;
 		this.documentos = documentos;
 	}
 

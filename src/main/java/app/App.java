@@ -1,49 +1,42 @@
 package app;
 
-import java.util.Date;
+import java.util.*;
 
-import app.entidades.Documento;
-import app.entidades.Empleado;
-import app.entidades.Estudiante;
-import app.entidades.Observacion;
-import app.entidades.Proceso;
-import app.entidades.Usuario;
-import app.entidades.repositorios.DocumentoRepositorio;
-import app.entidades.repositorios.ProcesoRepositorio;
-import app.entidades.repositorios.UsuarioRepositorio;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import org.eclipse.persistence.internal.oxm.schema.model.List;
+
+import app.entidades.*;
+import app.entidades.repositorios.*;
+import app.servicio.ControladorRegistrarProceso;
 import app.servicio.UsuarioServicio;
+
 
 public class App {
 	public static void main(String args[]) {
-		UsuarioServicio usr=new UsuarioServicio();
-		/*
-		Usuario estudiante = new Estudiante("231DS14","Josue Angel", "Ferro", "Quispe", "jferro.231ds13@istta.edu.pe","Estudiante", "967191391", "minibumer12", "NO", "DSI", "6");
-		Usuario empleado = new Empleado("231DS15","Fernando", "Cuellar", "Izquierdo", "fCuellar.231ds14@istta.edu.pe","Profesor", "967191391", "minibumer12", "NO", "Secretaria Academica", null);
-		usr.crearUsuario(empleado);
-		*/
-		/*Usuario empleado = new Empleado("231DS15","Fernando", "Cuellar", "Izquierdo", "fCuellar.231ds14@istta.edu.pe","Profesor", "967191391", "minibumer12", "NO", "Secretaria Academica", null, null);
-		Date fechaActual = new Date();
-		Proceso proceso= new Proceso("nuevo proceso2",fechaActual, fechaActual,"pendiente", empleado, null);
+		UsuarioRepositorio usr=new UsuarioRepositorio();
+		Date fecha=new Date();
 		
-		Documento documento= new Documento("documento con observacion", fechaActual, fechaActual, fechaActual, "observado", "fisico", proceso);
-		Observacion observacion = new Observacion("EL documento no tiene dni", fechaActual, (Empleado)empleado);
-		usr.crearProceso(proceso);
-		usr.crearDocumento(documento);
-		usr.crearObservacion(observacion);*/
-		//usr.crearProceso(proceso);
+		Documento documento1=new Documento("FUT-prueba2", fecha, fecha, fecha, "activo", "fisico");
+		Documento documento2=new Documento("FUT2-prueba2", fecha, fecha, fecha, "activo2", "fisico2");
+		java.util.List<Documento> documentos = new ArrayList<>();
+		documentos.add(documento1);
+		documentos.add(documento2);
+		java.util.List<Proceso> procesos = new ArrayList<>();
+		Proceso proceso1 = new Proceso("titulacion-prueba2", fecha,fecha, "activo",documentos);
+		procesos.add(proceso1);
+		documento1.setProceso(proceso1);
+		documento2.setProceso(proceso1);
+
+		Usuario usuario2=new Estudiante("231DS53", "josue-prueba2", "ferro", "quispe", "jferro@istta.edu.pe", "estudiante", "23496262", "asdfadfa", "si","dsi", "3", procesos);
+		proceso1.setUsuario(usuario2);
+		usr.persistirUsuarioRefactorizado(usuario2);
+
+
 		
-		DocumentoRepositorio dc=new DocumentoRepositorio();
-		ProcesoRepositorio pc=new ProcesoRepositorio();
-		UsuarioRepositorio uc=new UsuarioRepositorio();
-		Usuario estudiante = new Estudiante("231DS19","Jimmy", "Perez", "Quispe", "jperez.231ds17@istta.edu.pe","Estudiante", "967191391", "minibumer12", "NO", "DSI", "6", null);
-		Date fechaActual = new Date();
-		Proceso proceso= new Proceso("",fechaActual, fechaActual,"pendiente", estudiante, null);
-		
-		Documento documento= new Documento("documento con observacion", fechaActual, fechaActual, fechaActual, "observado", "fisico", proceso);
-		
-		dc.crearDocumento(documento, pc.crearProceso(proceso, uc.persistirUsuario(estudiante)));
-		
-		System.out.println("hola mundo");
 	}
 	
 }

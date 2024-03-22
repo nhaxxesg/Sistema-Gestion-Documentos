@@ -72,6 +72,14 @@ public class Observacion {
 	public void setDocumento(Documento documento) {
 		this.documento = documento;
 	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
 	
 	
 	

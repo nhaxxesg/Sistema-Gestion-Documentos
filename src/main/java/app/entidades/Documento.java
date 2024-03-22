@@ -3,6 +3,7 @@ package app.entidades;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Documento {
 	@JoinColumn(name = "proc_id")
 	private Proceso proceso;
 	
-	@OneToMany(mappedBy = "documento")
+	@OneToMany(mappedBy = "documento", cascade = CascadeType.PERSIST)
 	private List<Observacion> observaciones;
 
 	public Documento() {
@@ -54,6 +55,18 @@ public class Documento {
 		this.estado = estado;
 		this.formato = formato;
 		this.proceso = proceso;
+	}
+
+	
+
+	public Documento(String titulo, Date fechaCreacion, Date fechaModificacion, Date fechaEmision,
+			String estado, String formato) {
+		this.titulo = titulo;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaModificacion = fechaModificacion;
+		this.fechaEmision = fechaEmision;
+		this.estado = estado;
+		this.formato = formato;
 	}
 
 	public Integer getIdDocumento() {

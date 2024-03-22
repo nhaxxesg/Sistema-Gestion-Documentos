@@ -13,20 +13,20 @@ public class ProcesoRepositorio {
 	private EntityManager em;
 	private EntityTransaction etx;
 	private EntityManagerFactory emf;
+	private UsuarioRepositorio usuarioRepositorio;
 
 	public ProcesoRepositorio() {
 		super();
 		this.emf = Persistence.createEntityManagerFactory("persistence");
 		this.em = emf.createEntityManager();
 		this.etx = em.getTransaction();
+		this.usuarioRepositorio = new UsuarioRepositorio();
 	}
 
-	public Integer crearProceso(Proceso proceso, String codigoUsuario) {
-		// boolean esValido = ValidarInformacion.validar(proceso);
-		boolean esValido = true;
+	public Integer persistirProceso(Proceso proceso, String codigoUsuario) {
 		Integer idAsignado = null;
-		if (esValido) {
-			Usuario usuarioBuscado = buscarUsuarioPorCodigo(codigoUsuario);
+		Usuario usuarioBuscado = usuarioRepositorio.buscarUsuario(codigoUsuario);
+		if (!ValidarInformacion.esNulo(proceso) && usuarioBuscado != null) {
 			try {
 				etx.begin();
 				proceso.setUsuario(usuarioBuscado);
@@ -35,12 +35,16 @@ public class ProcesoRepositorio {
 				idAsignado = proceso.getIdProceso();
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally{
+				em.close();
+				emf.close();
 			}
 		}
 		return idAsignado;
 	}
 
-	public Usuario buscarUsuarioPorCodigo(String codigoUsuario) {
-		return em.find(Usuario.class, codigoUsuario);
+	public Proceso buscaProceso(Integer idProceso){
+		return em.find(Proceso.class, idProceso);
 	}
+
 }

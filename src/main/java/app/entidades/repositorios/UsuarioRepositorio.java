@@ -1,11 +1,9 @@
 package app.entidades.repositorios;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 import app.entidades.Usuario;
+import app.entidades.externos.ValidarInformacion;
 
 public class UsuarioRepositorio {
 	private EntityManager em;
@@ -20,10 +18,8 @@ public class UsuarioRepositorio {
 	}
 
 	public String persistirUsuario(Usuario usuario) {
-		//boolean esValido=validar(usuario);
-		boolean esValido =true;
 		String idAsignado=null;
-		if(esValido) {
+		if(!ValidarInformacion.esNulo(usuario) && !existeUsuario(usuario)) {
 			try {
 				etx.begin();
 				em.persist(usuario);
@@ -36,9 +32,30 @@ public class UsuarioRepositorio {
 		return idAsignado;
 	}
 
-	private boolean validar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existeUsuario(Usuario usuario) {
+		boolean existe = false;
+		if(em.find(Usuario.class, usuario.getCodigo()) != null){
+			existe =true;
+		}
+		return existe;
 	}
 
+	public boolean existeUsuario(String codigoUsuario){
+		boolean existe = false;
+		if(em.find(Usuario.class, codigoUsuario) != null){
+			existe =true;
+		}
+		return existe;
+	}
+
+	public Usuario buscarUsuario(String codigo){
+		return em.find(Usuario.class, codigo);
+	}
+
+	public void persistirUsuarioRefactorizado(Usuario usuario){
+		this.etx.begin();
+		this.em.persist(usuario);
+		this.etx.commit();
+
+	}
 }
