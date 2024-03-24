@@ -23,7 +23,7 @@ public class ProcesoRepositorio {
 		this.usuarioRepositorio = new UsuarioRepositorio();
 	}
 
-	public Integer persistirProceso(Proceso proceso, String codigoUsuario) {
+	public Integer persistirProcesoIndependiente(Proceso proceso, String codigoUsuario) {
 		Integer idAsignado = null;
 		Usuario usuarioBuscado = usuarioRepositorio.buscarUsuario(codigoUsuario);
 		if (!ValidarInformacion.esNulo(proceso) && usuarioBuscado != null) {
@@ -45,6 +45,12 @@ public class ProcesoRepositorio {
 
 	public Proceso buscaProceso(Integer idProceso){
 		return em.find(Proceso.class, idProceso);
+	}
+
+	public void persistirProcesoRefactorizado(Proceso proceso){
+		etx.begin();
+		em.persist(proceso);
+		etx.commit();
 	}
 
 }

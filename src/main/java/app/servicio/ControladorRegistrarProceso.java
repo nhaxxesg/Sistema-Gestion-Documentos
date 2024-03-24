@@ -1,11 +1,12 @@
 package app.servicio;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.eclipse.persistence.internal.oxm.schema.model.List;
 
 import app.entidades.*;
 import app.entidades.repositorios.DocumentoRepositorio;
@@ -32,31 +33,13 @@ public class ControladorRegistrarProceso {
 		this.etx = em.getTransaction();
     }
 
-    /* FUNCION registrarProceso (usuario)                                         
-        ES                                                                         
-        proceso = obtener proceso de usuario                                       
-        documentos = obtener lista de documento de proceso                         
-                                                                                
-                                                                                
-        idAsignadoUsuario =  persistirUsuario();                                   
-        idAsignadoProceso = persistirProceso()                                     
-        PARA documento DE una lista de documento                                   
-        persistirDocumento(documento)                                              
-        observaciones = obtener observaciones de documento                         
-        PARA observacion DE observaciones                                          
-        persistir observacion  */
     public void registrarProceso(Usuario usuario){
-        String idAsignadoUsuario = this.usuarioRepositorio.persistirUsuario(usuario);
-        Proceso proceso= usuario.getProcesos().get(0);
-        java.util.List<Documento> documentos = proceso.getDocumentos();
-        Integer idAsignadoProceso = this.procesoRepositorio.persistirProceso(proceso, idAsignadoUsuario);
-        for (Documento documento : documentos) {
-            Integer idAsignadoDocumento = this.documentoRepositorio.persistirDocumento(documento, idAsignadoProceso);
-            java.util.List<Observacion> observaciones = documento.getObservaciones();
-            for (Observacion observacion : observaciones) {
-                this.observacionRepositorio.persistirObservacion(observacion, idAsignadoDocumento, idAsignadoUsuario);
-            }
+        if(em.find(Usuario.class, usuario.getCodigo()) == null){
+            usuarioRepositorio.persistirUsuarioRefactorizado(usuario);
+        }else{
+            procesoRepositorio.persistirProcesoRefactorizado(usuario.getProcesos().get(0));
         }
+        
     }
 
     public void informacionProcesos(){

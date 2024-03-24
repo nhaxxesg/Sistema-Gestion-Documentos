@@ -141,5 +141,14 @@ public class Documento {
 		this.observaciones = observaciones;
 	}
 
+	@Override
+	public String toString() {
+		return "Documento [idDocumento=" + idDocumento + ", titulo=" + titulo + ", fechaCreacion=" + fechaCreacion
+				+ ", fechaModificacion=" + fechaModificacion + ", fechaEmision=" + fechaEmision + ", estado=" + estado
+				+ ", formato=" + formato + ", proceso=" + proceso + ", observaciones=" + observaciones + "]";
+	}
+
+	
+
 	
 }

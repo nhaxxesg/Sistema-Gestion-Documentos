@@ -25,7 +25,7 @@ public class Proceso {
 	@JoinColumn(name = "usr_codigo", nullable = false)
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "proceso", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "proceso", cascade = CascadeType.ALL)
 	private List<Documento> documentos;
 
 	public Proceso() {

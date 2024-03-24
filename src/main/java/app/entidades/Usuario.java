@@ -35,7 +35,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	private List<Proceso> procesos;
 	*/
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Proceso> procesos;
 	
 	public Usuario() {
