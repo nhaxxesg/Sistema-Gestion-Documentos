@@ -25,8 +25,8 @@ public class Estudiante extends Usuario {
 	}
 
 	public Estudiante(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
-			String rol, String telefono, String contrasena, String activo, String carrera, String semestre, List<Proceso> procesos) {
-		super(codigo, nombre, apellido1, apellido2, correoInstitucional, rol, telefono, contrasena, activo,procesos);
+			String rol, String telefono, String contrasena, String activo, String carrera, String semestre) {
+		super(codigo, nombre, apellido1, apellido2, correoInstitucional, rol, telefono, contrasena, activo);
 		this.carrera = carrera;
 		this.semestre = semestre;
 	}

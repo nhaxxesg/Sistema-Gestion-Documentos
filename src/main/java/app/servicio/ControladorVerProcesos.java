@@ -10,11 +10,11 @@ import javax.swing.text.html.parser.Entity;
 
 import com.mysql.cj.protocol.InternalTime;
 
+import app.Utilidades.ValidarInformacion;
 import app.entidades.Documento;
 import app.entidades.Observacion;
 import app.entidades.Proceso;
 import app.entidades.Usuario;
-import app.entidades.externos.ValidarInformacion;
 import app.entidades.repositorios.DocumentoRepositorio;
 import app.entidades.repositorios.ObservacionRepositorio;
 import app.entidades.repositorios.ProcesoRepositorio;

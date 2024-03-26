@@ -5,8 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.swing.event.DocumentEvent;
 
+import app.Utilidades.ValidarInformacion;
 import app.entidades.*;
-import app.entidades.externos.ValidarInformacion;
 
 public class ObservacionRepositorio {
     private EntityManager em;

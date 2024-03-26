@@ -42,6 +42,23 @@ public class Usuario {
 		super();
 	}
 
+	
+
+	public Usuario(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
+			String rol, String telefono, String contrasena, String activo) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.correoInstitucional = correoInstitucional;
+		this.rol = rol;
+		this.telefono = telefono;
+		this.contrasena = contrasena;
+		this.activo = activo;
+	}
+
+
+
 	public Usuario(String codigo, String nombre, String apellido1, String apellido2, String correoInstitucional,
 			String rol, String telefono, String contrasena, String activo, List<Proceso> procesos) {
 		super();

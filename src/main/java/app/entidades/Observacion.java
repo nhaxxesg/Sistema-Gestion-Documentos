@@ -23,11 +23,11 @@ public class Observacion {
 	@Column(name = "obs_fecha")
 	private Date fecha;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "doc_id")
 	private Documento documento;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "usr_codigo")
 	private Empleado empleado; 
 	

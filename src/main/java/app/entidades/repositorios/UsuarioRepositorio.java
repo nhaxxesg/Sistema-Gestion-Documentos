@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.mappings.converters.ObjectTypeConverter;
+
+import app.Utilidades.ValidarInformacion;
 import app.entidades.Usuario;
-import app.entidades.externos.ValidarInformacion;
 
 public class UsuarioRepositorio {
 	private EntityManager em;
@@ -73,14 +75,21 @@ public class UsuarioRepositorio {
 	public List<Object[]> buscarInformacionUsuariosPorPatron(String patron) {
 		List<Object[]> lista = this.em.createQuery(
 				"select u.codigo, u.nombre, p.nombre, p.estado, COUNT(d) from Usuario u JOIN u.procesos p JOIN p.documentos d where CONCAT(u.codigo, u.nombre, p.nombre, p.estado) like :patron GROUP BY u.codigo, u.nombre, p.nombre, p.estado")
-				.setParameter("patron", ('%'+patron+'%'))
+				.setParameter("patron", ('%' + patron + '%'))
 				.getResultList();
 		return lista;
 	}
 
-	public void actualizarUsuario(Usuario usuarioActualizado){
+	public void actualizarUsuario(Usuario usuarioActualizado) {
 		this.etx.begin();
 		em.merge(usuarioActualizado);
 		this.etx.commit();
+	}
+
+	public Object buscarUsuarioPorCorreoInstitucional(String correoInstitucional) {
+		Object resultado = em.createQuery("select u from Usuario u where u.correoInstitucional like :correo")
+				.setParameter("correo", correoInstitucional)
+				.getSingleResult();
+		return resultado;
 	}
 }

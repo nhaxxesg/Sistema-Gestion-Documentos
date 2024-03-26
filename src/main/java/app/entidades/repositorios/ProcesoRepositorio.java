@@ -5,9 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import app.Utilidades.ValidarInformacion;
 import app.entidades.Proceso;
 import app.entidades.Usuario;
-import app.entidades.externos.ValidarInformacion;
 
 public class ProcesoRepositorio {
 	private EntityManager em;

@@ -2,16 +2,17 @@ package app;
 
 import java.util.*;
 
-
+import app.Utilidades.Encoder;
 import app.entidades.*;
 import app.entidades.repositorios.*;
 import app.servicio.ControladorActualizarProcesos;
+import app.servicio.ControladorCrearUsuario;
 import app.servicio.ControladorRegistrarProceso;
 
 
 public class App {
 	public static void main(String args[]) {
-		UsuarioRepositorio usr=new UsuarioRepositorio();
+		/*UsuarioRepositorio usr=new UsuarioRepositorio();
 		ControladorRegistrarProceso cusr=new ControladorRegistrarProceso();
 		ControladorActualizarProcesos cap=new ControladorActualizarProcesos();
 		Date fecha=new Date();
@@ -48,7 +49,17 @@ public class App {
 		
 		cta.actualizarUsuario( usuarioModificar);*/
 
+		// probar el codificador de Spring 
+		ControladorCrearUsuario ccu = new ControladorCrearUsuario();
+		UsuarioRepositorio urp= new UsuarioRepositorio();
 
+		Usuario usuario2=new Estudiante("231DS47", "JOSUE CON NUEVA CONTRA", "ferro", "quispe", "jferro2323@istta.edu.pe", "estudiante", "23496262", "asdfadfa", "si","dsi", "3");
+		//ccu.crearUsuario(usuario2);
+		//ccu.crearUsuario(usuario2);
+		//urp.persistirUsuarioRefactorizado(usuario2);
+		System.out.println(ccu.iniciarSesion("asdfadfa1", "jferro2323@istta.edu.pe"));
+		/*Usuario usuario = (Usuario)urp.buscarUsuarioPorCorreoInstitucional("jferro2323@istta.edu.pe");
+		System.out.println(usuario.toString());*/
 	}
 	
 }

@@ -1,4 +1,4 @@
-package app.entidades.externos;
+package app.Utilidades;
 
 
 public class ValidarInformacion {
