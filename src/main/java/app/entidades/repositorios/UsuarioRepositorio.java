@@ -82,7 +82,5 @@ public class UsuarioRepositorio {
 		this.etx.begin();
 		em.merge(usuarioActualizado);
 		this.etx.commit();
-
-
 	}
 }

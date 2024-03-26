@@ -12,7 +12,7 @@ public class Empleado extends Usuario {
 	@Column(name = "emp_area")
 	private String area;
 
-	@OneToMany(mappedBy = "empleado")
+	@OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
 	private List<Informe> informes;
 	
 	@OneToMany(mappedBy = "empleado")

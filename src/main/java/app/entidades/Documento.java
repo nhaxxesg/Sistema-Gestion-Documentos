@@ -38,12 +38,27 @@ public class Documento {
 	@JoinColumn(name = "proc_id")
 	private Proceso proceso;
 	
-	@OneToMany(mappedBy = "documento", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "documento", cascade = CascadeType.ALL)
 	private List<Observacion> observaciones;
 
 	public Documento() {
 		super();
 	}
+	
+
+
+	public Documento(Integer idDocumento, String titulo, Date fechaCreacion, Date fechaModificacion, Date fechaEmision,
+			String estado, String formato) {
+		this.idDocumento = idDocumento;
+		this.titulo = titulo;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaModificacion = fechaModificacion;
+		this.fechaEmision = fechaEmision;
+		this.estado = estado;
+		this.formato = formato;
+	}
+
+
 
 	public Documento(String titulo, Date fechaCreacion, Date fechaModificacion, Date fechaEmision, String estado,
 			String formato, Proceso proceso) {
