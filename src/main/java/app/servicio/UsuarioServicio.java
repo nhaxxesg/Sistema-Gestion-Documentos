@@ -3,8 +3,6 @@ package app.servicio;
 import javax.persistence.*;
 
 import app.entidades.Documento;
-import app.entidades.Empleado;
-import app.entidades.Estudiante;
 import app.entidades.Observacion;
 import app.entidades.Proceso;
 import app.entidades.Usuario;
